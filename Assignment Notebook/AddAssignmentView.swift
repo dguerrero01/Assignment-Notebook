@@ -22,7 +22,19 @@ struct AddAssignmentView: View {
                         Text(course)
                     }
                 }
+                TextField("Description", text: $description)
+                               DatePicker("Due Date", selection: $dueDate, displayedComponents: .date)
             }
+            .navigationBarTitle("Add New Assignment", displayMode: .inline)
+            .navigationBarItems(trailing: Button("Save") {
+                            if course.count > 0 && description.count > 0 {
+                                let assignmentItem = AssignmentItem(id: UUID(), course: course,
+                                                    description: description, dueDate: dueDate)
+                                assignmentList.assignmentItems.append(assignmentItem)
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                        })
+
         }
     }
 }
