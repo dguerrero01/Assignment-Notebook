@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+let backgroundGradient = LinearGradient(
+    gradient: Gradient(colors: [Color.green, Color.blue]),
+    startPoint: .top, endPoint: .bottom)
+
 struct ContentView: View {
     @ObservedObject var assignmentList = AssignmentList()
     @State private var showingAddAssignmentView = false
@@ -32,17 +36,17 @@ struct ContentView: View {
                 })
             }
             .sheet(isPresented: $showingAddAssignmentView, content: {
-                           AddAssignmentView(assignmentList: assignmentList)
-                       })
-
+                AddAssignmentView(assignmentList: assignmentList)
+            })
+            
             .navigationBarTitle("Assignment List", displayMode: .inline)
             .navigationBarItems(leading: EditButton(),
-                                            trailing: Button(action: {
-                                                showingAddAssignmentView = true}) {
-                                                Image(systemName: "plus")
-                        })
-
+                                trailing: Button(action: {
+                                                    showingAddAssignmentView = true}) {
+                                    Image(systemName: "plus")
+                                })
         }
+        
     }
 }
 

@@ -26,5 +26,4 @@ class AssignmentList: ObservableObject {
         }
         assignmentItems = []
     }
-    
 }
