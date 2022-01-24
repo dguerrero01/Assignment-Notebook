@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-let backgroundGradient = LinearGradient(
-    gradient: Gradient(colors: [Color.green, Color.blue]),
-    startPoint: .top, endPoint: .bottom)
 
 struct ContentView: View {
     @ObservedObject var assignmentList = AssignmentList()
     @State private var showingAddAssignmentView = false
+    init() {
+        UITableView.appearance().backgroundColor = .orange
+    }
     var body: some View {
         NavigationView {
             List {
@@ -34,6 +34,8 @@ struct ContentView: View {
                 .onDelete(perform: { indexSet in
                     assignmentList.assignmentItems.remove(atOffsets: indexSet)
                 })
+                .background (
+                    LinearGradient(gradient: Gradient(colors: [.green, .blue]), startPoint: .top, endPoint: .bottom))
             }
             .sheet(isPresented: $showingAddAssignmentView, content: {
                 AddAssignmentView(assignmentList: assignmentList)
@@ -46,7 +48,6 @@ struct ContentView: View {
                                     Image(systemName: "plus")
                                 })
         }
-        
     }
 }
 
